@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/config_provider.dart';
+import '../providers/config_provider.dart'; // Remote Config: estado de parámetros remotos en la UI.
 
 class ConfigScreen extends StatefulWidget {
   const ConfigScreen({super.key});
@@ -15,12 +15,14 @@ class _ConfigScreenState extends State<ConfigScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Remote Config: primer fetch al abrir la pestaña.
       context.read<ConfigProvider>().initialize();
     });
   }
 
   Future<void> _onForceRefresh(BuildContext context) async {
     final provider = context.read<ConfigProvider>();
+    // Remote Config: fetch & activate manual desde la UI.
     final updated = await provider.forceRefresh();
     if (!context.mounted) return;
 
@@ -48,6 +50,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Remote Config: UI condicionada por el parámetro show_promo.
               if (config.showPromo)
                 Card(
                   color: Theme.of(context).colorScheme.primaryContainer,
@@ -63,6 +66,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                         const SizedBox(width: 16),
                         Expanded(
                           child: Text(
+                            // Remote Config: texto del parámetro banner_text.
                             config.bannerText,
                             style: Theme.of(context)
                                 .textTheme

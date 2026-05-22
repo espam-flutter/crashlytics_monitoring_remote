@@ -2,11 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../injection/service_locator.dart';
-import '../services/crashlytics_service.dart';
+import '../services/crashlytics_service.dart'; // Crashlytics: pantalla de pruebas del SDK.
 
 class CrashScreen extends StatelessWidget {
   const CrashScreen({super.key});
 
+  // Crashlytics: acceso al servicio registrado en GetIt.
   CrashlyticsService get _crashlytics => getIt<CrashlyticsService>();
 
   Future<void> _recordNonFatalError(BuildContext context) async {
@@ -26,9 +27,11 @@ class CrashScreen extends StatelessWidget {
       final b = 0;
       final _ = a ~/ b;
     } catch (e, stack) {
+      // Crashlytics: breadcrumb antes del informe no fatal.
       await _crashlytics.log(
         'Error no fatal simulado desde CrashScreen (división por cero)',
       );
+      // Crashlytics: envía la excepción capturada sin marcarla como fatal.
       await _crashlytics.recordError(
         e,
         stack,
@@ -86,6 +89,7 @@ class CrashScreen extends StatelessWidget {
           ),
           const Spacer(),
           FilledButton.icon(
+            // Crashlytics: crash nativo de prueba (deshabilitado en web).
             onPressed: CrashlyticsService.isSupported
                 ? _crashlytics.forceCrash
                 : null,
@@ -99,6 +103,7 @@ class CrashScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           OutlinedButton.icon(
+            // Crashlytics: simula y registra un error no fatal.
             onPressed: CrashlyticsService.isSupported
                 ? () => _recordNonFatalError(context)
                 : null,

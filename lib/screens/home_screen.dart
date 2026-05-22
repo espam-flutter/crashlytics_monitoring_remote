@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'config_screen.dart';
-import 'crash_screen.dart';
-import 'perf_screen.dart';
+import 'config_screen.dart'; // Remote Config
+import 'crash_screen.dart'; // Crashlytics
+import 'perf_screen.dart'; // Performance Monitoring
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
+  // Navegación entre las tres demos de Firebase.
   static const _titles = [
     'Crashlytics',
     'Performance',
@@ -21,9 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   final _screens = const [
-    CrashScreen(),
-    PerfScreen(),
-    ConfigScreen(),
+    CrashScreen(), // Crashlytics
+    PerfScreen(), // Performance Monitoring
+    ConfigScreen(), // Remote Config
   ];
 
   @override

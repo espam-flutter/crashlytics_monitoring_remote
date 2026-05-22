@@ -1,3 +1,4 @@
+// Firebase Core: credenciales por plataforma (compartidas por Crashlytics, Performance y Remote Config).
 // Archivo generado por FlutterFire CLI (`flutterfire configure`).
 // Reemplaza estos valores ejecutando: dart pub global activate flutterfire_cli && flutterfire configure
 
@@ -6,6 +7,7 @@ import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
 class DefaultFirebaseOptions {
+  // Firebase Core: selecciona el FirebaseOptions según web, Android, iOS o macOS.
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       return web;

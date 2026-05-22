@@ -5,6 +5,7 @@ import '../services/remote_config_service.dart';
 class ConfigProvider extends ChangeNotifier {
   ConfigProvider(this._remoteConfigService);
 
+  // Remote Config: servicio que lee y actualiza parámetros del SDK.
   final RemoteConfigService _remoteConfigService;
 
   bool _isLoading = false;
@@ -15,7 +16,9 @@ class ConfigProvider extends ChangeNotifier {
   bool get isInitialized => _isInitialized;
   String? get errorMessage => _errorMessage;
 
+  // Remote Config: expone parámetro banner_text activo en el dispositivo.
   String get bannerText => _remoteConfigService.bannerText;
+  // Remote Config: expone parámetro show_promo activo en el dispositivo.
   bool get showPromo => _remoteConfigService.showPromo;
 
   Future<void> initialize() async {
@@ -25,6 +28,7 @@ class ConfigProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
+      // Remote Config: defaults, settings y primer fetchAndActivate.
       await _remoteConfigService.initialize();
       _isInitialized = true;
     } catch (e) {
@@ -41,6 +45,7 @@ class ConfigProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
+      // Remote Config: fetch manual desde el botón de la pantalla Config.
       final updated = await _remoteConfigService.fetchAndActivate();
       return updated;
     } catch (e) {

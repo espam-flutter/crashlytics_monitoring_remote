@@ -9,7 +9,10 @@ final GetIt getIt = GetIt.instance;
 void setupServiceLocator() {
   if (getIt.isRegistered<CrashlyticsService>()) return;
 
+  // Crashlytics: singleton del wrapper de reporte de errores.
   getIt.registerLazySingleton<CrashlyticsService>(CrashlyticsService.new);
+  // Performance Monitoring: singleton del wrapper de trazas.
   getIt.registerLazySingleton<PerformanceService>(PerformanceService.new);
+  // Remote Config: singleton del wrapper de parámetros remotos.
   getIt.registerLazySingleton<RemoteConfigService>(RemoteConfigService.new);
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/perf_provider.dart';
+import '../providers/perf_provider.dart'; // Performance Monitoring: estado de trazas en la UI.
 
 class PerfScreen extends StatelessWidget {
   const PerfScreen({super.key});
@@ -56,6 +56,7 @@ class PerfScreen extends StatelessWidget {
                 ),
               ] else
                 FilledButton.icon(
+                  // Performance Monitoring: arranca traza + proceso simulado.
                   onPressed: perf.runHeavyProcess,
                   icon: const Icon(Icons.play_arrow),
                   label: const Text('Iniciar proceso pesado'),
